@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en" data-framework="angularjs">
+<head>
+    <meta charset="utf-8">
+    <title>TicketAlert</title>
+    {% stylesheets output='js/styles'
+    "@AcmeApiClientBundle/Resources/public/css/main.css"
+	"@AcmeApiClientBundle/Resources/public/css/login.css"
+	"@AcmeApiClientBundle/Resources/public/css/md-data-table.css"
+    %}
+	
+    <link href="{{ asset_url }}" type="text/css" rel="stylesheet" media="all"/>
+	   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+	   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endstylesheets %}
+    <script>
+        var root_path = "{{ asset('', null, true) }}";
+        var assets_path = root_path + "bundles/acmeapiclient/partials";
+    </script>
+</head>
+
+<body ng-app="ApiClient">
+
+<!--Header_section-->
+    <div id="wrap">
+		<nav class="navbar navbar-findcond navbar-fixed-top" ng-hide="hideit"><!--  -->
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+						<span class="sr-only">Menu</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" alt="logo" href=""><img src="images/logo_mantisnotifications.png" class="logo" ></a>
+				</div>
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href=""  aria-expanded="false"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
+					</li>
+						<li class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-cog"></i> Comptes <span class="badge"></span></a>
+							<ul class="dropdown-menu" id="accountList" role="menu"></ul>
+						</li>
+						<li class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-bell-o"></i> Paramétrages <span class="badge"></span></a>
+							<ul class="dropdown-menu" id="listParametrage" role="menu"></ul>
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-fw fa-user"></i></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href=""><i class="fa fa-cog"></i>Mon compte</a></li>
+								<li><a href=""><i class="fa fa-question-circle" aria-hidden="true"></i>FAQ</a></li>
+								<li><a href=""><i class="fa fa-sign-out"></i>Se déconnecter</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			</nav>
+			
+			<div ng-view class="container">
+			<!-- ANGULAR CONTENT GOES HERE -->
+		</div>
+
+		</div>
+		<!-- End wrap_section--> 
+		
+		<!--Footer-->
+		<div id="footer" ng-hide="hideit"> <!-- class="navbar-fixed-bottom" -->
+			<div class="container">
+			<p class="credit">TicketAlert 2016 - <a href="http://www.modisfrance.fr" target="_blank">Modis France</a></p>
+		</div>
+    </div>
+    <!--End Footer-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha512.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/enc-base64-min.js"></script>
+
+{% javascripts output='js/client'
+
+"@AcmeApiClientBundle/Resources/public/components/angular/angular.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-route/angular-route.min.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-cookies/angular-cookies.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-material/angular-material.min.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-animate/angular-animate.min.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-aria/angular-aria.min.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-messages/angular-messages.min.js"
+"@AcmeApiClientBundle/Resources/public/components/lodash/dist/lodash.js"
+"@AcmeApiClientBundle/Resources/public/components/restangular/dist/restangular.js"
+"@AcmeApiClientBundle/Resources/public/components/angular-bootstrap/ui-bootstrap-tpls.js"
+"@AcmeApiClientBundle/Resources/public/js/app.js"
+"@AcmeApiClientBundle/Resources/public/js/md-data-table.js"
+"@AcmeApiClientBundle/Resources/public/js/app-controller.js"
+"@AcmeApiClientBundle/Resources/public/js/app-services.js"
+%}
+
+<script src="{{ asset_url }}" type="text/javascript"></script>
+
+{% endjavascripts %}
+
+
+
+</body>
+
+</html>

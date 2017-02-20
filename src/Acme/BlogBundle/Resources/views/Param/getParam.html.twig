@@ -1,0 +1,23 @@
+{% extends "@AcmeBlog/layout.html.twig" %}
+
+{% block content %}
+
+    <h1 class="title">#{{ param.id }} - {{ param.title }}</h1>
+
+    <p>
+        {{ param.body }}
+    </p>
+
+    <p>
+        <a href="{{ path('api_edit_param', {'id': param.id}) }}">
+            Edit
+        </a>
+    </p>
+
+    <p>
+        <a href="{{ path('api_get_params') }}">
+            Go back
+        </a>
+    </p>
+
+{% endblock %}

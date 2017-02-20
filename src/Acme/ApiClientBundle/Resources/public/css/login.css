@@ -1,0 +1,111 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
+
+*{margin:0;padding:0;}
+
+body {
+  color: #666666;
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width:65%;
+}
+
+/* Form Module */
+#login {
+  position: relative;
+  background: #ffffff;
+  max-width: 520px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+
+#login{
+  margin:0 auto;
+  margin-top:100px;
+  margin-bottom:2%;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+}
+
+#login h1{
+  font-size:120%;
+  font-weight:300;
+  text-align:center;
+  margin:10px 10px 10px 10px;
+  transition:opacity 1s;
+  -webkit-transition:opacity 1s;
+  background:#fff;
+}
+
+#login h3{
+padding-top:17px;
+font-size: 18px;
+}
+
+
+.header{
+  height:60px;
+  background:#0294FD;
+  color:#FFF;
+  text-align:center;
+}
+
+form{
+  background:#f0f0f0;
+  padding:6% 4%;
+}
+
+input[type="id"],input[type="password"]{
+  width:90%;
+  background:#fff;
+  margin-bottom:4%;
+  border:1px solid #ccc;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:80%;
+  color:#555;
+}
+
+input[type="submit"]{
+  width:100%;
+  background:#0294FD;
+  border:0;
+  padding:4%;
+  font-family:'Open Sans',sans-serif;
+  font-size:100%;
+  color:#fff;
+  cursor:pointer;
+  transition:background .3s;
+  -webkit-transition:background .3s;
+  -webkit-appearance: none;
+  border-radius:0;
+}
+
+input[type="submit"]:hover{
+  background:#2288bb;
+}
+
+.error{
+  color:red;
+  font-weight:bold;
+  font-size:13px;
+}
+
+.error p{
+  margin-bottom:5px;
+}
+
+.button:hover{
+  background:#2288bb;
+}
+
+
+
+
+

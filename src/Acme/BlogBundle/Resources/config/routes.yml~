@@ -1,0 +1,30 @@
+acme_blog_Param:
+    type: rest
+    resource: "@AcmeBlogBundle/Controller/ParamController.php"
+    name_prefix:  api_ # naming collision
+    prefix:   /api
+
+acme_blog_User:
+    type: rest
+    resource: "@AcmeBlogBundle/Controller/UserController.php"
+    name_prefix:  public_ # naming collision
+    prefix:   /public
+    
+acme_blog_Account:
+    type: rest
+    resource: "@AcmeBlogBundle/Controller/AccountController.php"
+    name_prefix:  api_ # naming collision
+    prefix:   /api
+    
+    
+acme_blog_Stat:
+    type: rest
+    resource: "@AcmeBlogBundle/Controller/StatController.php"
+    name_prefix:  api_ # naming collision
+    prefix:   /api
+    
+acme_blog_Token:
+    type: rest
+    resource: "@AcmeBlogBundle/Controller/TokenController.php"
+    name_prefix:  api_ # naming collision
+    prefix:   /api

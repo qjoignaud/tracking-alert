@@ -1,0 +1,19 @@
+{% extends "@AcmeBlog/layout.html.twig" %}
+
+{% block content %}
+
+    <h1 class="title">All params</h1>
+
+    <ul id="todo-list">
+        {% for param in params %}
+            <li>
+                {{ page.id }} -
+                <a href="{{ path('api_get_param', {'id': page.id}) }}"> {{ page.priority_id }}</a> -
+                {{ page.body }}
+            </li>
+        {% else %}
+            <li>empty</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

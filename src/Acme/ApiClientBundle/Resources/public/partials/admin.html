@@ -1,0 +1,137 @@
+<div ng-controller="paramCtrl">
+	<div ng-cloak id="param">
+	  <md-content>
+		<md-tabs md-dynamic-height md-border-bottom>
+		  <md-tab label="Ajouter un paramétrage">
+			<md-content class="md-padding">
+					<form name="formParam" id="formParam" novalidate>	
+						<div class="container-fluid">
+							<div layout="column" layout-align="center center">
+								<div class="im-centered">
+									<div class="row">
+										<div class="form-group col-xs-6">
+											<md-select placeholder="Choix du projet" ng-model="project" md-on-open="loadProjects()" style="width: 210px;" ng-required="true">
+											  <md-option ng-value="project" ng-repeat="project in projects">{{project.name}}</md-option>
+											</md-select>
+										</div>
+										<div class="form-group col-xs-6" ng-show="project.id > 0">
+											<!--<p class="md-caption">You have assigned the task to: {{ project ? project.name : 'No one yet' }}</p>-->
+											<md-select placeholder="Choix des utilisateurs" ng-model="user" md-on-open="loadUsers()" style="width: 200px;" ng-required="true" multiple>
+											  <md-option ng-value="user" ng-repeat="user in users">{{user.name}}</md-option>
+											</md-select>
+										</div>
+									</div>
+								</div>
+								<div class="im-centered">
+									<div class="row">
+										<div class="form-group col-sm-12" ng-show="user.length > 0">
+											<md-switch ng-model="chbxEmail" aria-label="Email" ng-click="unchecked()">Email</md-switch>
+											<md-switch ng-model="chbxUrgent" ng-show="chbxEmail" aria-label="Email urgent">Email Urgent</md-switch>
+											<md-switch ng-model="chbxSms" aria-label="Sms">Sms</md-switch>
+										</div>	
+									</div>
+								</div>
+								<div class="row" ng-show="chbxEmail || chbxUrgent || chbxSms">
+									<div class="col-xs-3">
+										<md-select placeholder="Priorités requises" ng-model="priority" md-on-open="loadPriorities()" style="width: 200px;" ng-required="true" multiple>
+										  <md-option ng-value="priority" ng-repeat="priority in priorities">{{priority.name}}</md-option>
+										</md-select>
+									</div>
+									<div class="col-xs-3">
+										<md-select placeholder="Catégories requises" ng-model="category" md-on-open="loadCategories()" style="width: 200px;" ng-required="true" multiple>
+										  <md-option ng-value="category" ng-repeat="category in categories">{{category.name}}</md-option>
+										</md-select>
+									</div>
+									<div class="col-xs-3">
+										<md-select placeholder="Impacts requis" ng-model="severity" md-on-open="loadSeverities()" style="width: 200px;" ng-required="true" multiple>
+										  <md-option ng-value="severity" ng-repeat="severity in severities">{{severity.name}}</md-option>
+										</md-select>
+									</div>
+									<div class="col-xs-3">
+										<md-select placeholder="Statuts requis" ng-model="status" md-on-open="loadStatuses()" style="width: 200px;" ng-required="true" multiple>
+										  <md-option ng-value="status" ng-repeat="status in statuses">{{status.name}}</md-option>
+										</md-select>
+									</div>
+								</div>
+								<div class="im-centered">
+									<div class="row">
+										<div class="form-group col-sm-12">
+											<md-button class="md-raised md-primary" ng-click="save()" ng-disabled="!priority || !category || !severity || !status">Enregistrer</md-button>
+											<md-button type="reset" ng-click="resetForm()" class="md-raised md-warn" >Reset</md-button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+
+			</md-content>
+		  </md-tab>
+		  <md-tab label="Consulter mes paramétrages">
+			<md-content class="md-padding">
+				<div class="container-fluid">
+					<div layout="column" layout-align="center center">
+						<div class="im-centered">
+							<div class="row">
+								<div class="col-xs-12">
+									<md-select placeholder="Choix du projet" ng-model="searchParam" md-on-open="loadProjects()" style="width: 210px;" ng-required="true">
+									  <md-option ng-value="searchParam" ng-repeat="searchParam in projects">{{searchParam.name}}</md-option>
+									</md-select>
+								</div>
+							</div>
+						</div>
+						<div  class="row" ng-show="searchParam.id > 0">
+							<form class="form-horizontal" role="form">
+								<div class="row" ng-repeat="param in params">
+									<div class="form-inline">
+										<md-button class="md-fab md-mini md-primary md-button">
+											<md-icon md-svg-src="img/icons/ic_settings_white_24px.svg" class="name"></md-icon>
+										</md-button>
+										<!--<p class="md-caption">You have assigned the task to: {{ project ? project.name : 'No one yet' }}</p>-->
+										<md-select placeholder="Choix des utilisateurs" ng-model="param.name" style="width: 180px;" ng-required="true">
+										  <md-option ng-value="param.name">{{param.name}}</md-option>
+										</md-select>
+										
+										<span class="form-inline switch">
+											<md-switch ng-model="param.chbxEmail" aria-label="Email" ng-click="unchecked()">Email</md-switch>
+											<md-switch ng-model="param.chbxUrgent" ng-show="param.chbxEmail" aria-label="Email urgent">Email Urgent</md-switch>
+											<md-switch ng-model="param.chbxSms" aria-label="Sms">Sms</md-switch>
+										</span>
+										<span class="form-inline">
+											<select ng-model="param.priorities" ng-options="option.id as option.name for option in test" style="width: 150px;" ng-required="true" multiple >
+										
+											</select>	
+											
+										</span>
+										<span class="form-inline">
+											<md-select ng-model="category" md-on-open="loadCategories()" style="width: 150px;" ng-required="true" multiple>
+											  <md-option ng-value="category" ng-repeat="category in categories">{{category.name}}</md-option>
+											</md-select>
+										</span>
+										<span class="form-inline">
+											<md-select ng-model="severity" md-on-open="loadSeverities()" style="width: 150px;" ng-required="true" multiple>
+											  <md-option ng-value="severity" ng-repeat="severity in severities">{{severity.name}}</md-option>
+											</md-select>
+										</span>
+										<span class="form-inline">
+											<md-select ng-model="status" md-on-open="loadStatuses()" style="width: 150px;" ng-required="true" multiple>
+											  <md-option ng-value="status" ng-repeat="status in statuses">{{status.name}}</md-option>
+											</md-select>
+										</span>
+										<!--<div class="col-sm-12">
+											<md-button class="md-raised md-primary" ng-click="save()" ng-disabled="!priority || !category || !severity || !status">Enregistrer</md-button>
+											<md-button type="reset" ng-click="resetForm()" class="md-raised md-warn" >Reset</md-button>
+										</div>-->
+									</div>	
+								</div>
+			
+							</form>
+						</div>
+					</div>
+				</div>
+			</md-content>
+		  </md-tab>
+		</md-tabs>
+	  </md-content>
+	</div>
+</div>

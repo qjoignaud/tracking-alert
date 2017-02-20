@@ -1,0 +1,39 @@
+services:
+
+    mantis_api_bundle.service.login:
+        class: A5sys\MantisApiBundle\Services\LoginService
+        arguments:
+            - "@mantis_api_bundle.service.mantis_client"
+
+    mantis_api_bundle.service.project:
+        class: A5sys\MantisApiBundle\Services\ProjectService
+        arguments:
+            - "@mantis_api_bundle.service.mantis_client"
+
+    mantis_api_bundle.service.mantis_client:
+        class: A5sys\MantisApiBundle\Services\MantisClientService
+        arguments:
+            - '%mantis_api.url%'
+            - '%mantis_api.username%'
+            - '%mantis_api.password%'
+
+    mantis_api_bundle.service.user:
+        class: A5sys\MantisApiBundle\Services\UserService
+        arguments:
+            - "@mantis_api_bundle.service.mantis_client"
+
+    mantis_api_bundle.service.issue:
+        class: A5sys\MantisApiBundle\Services\IssueService
+        arguments:
+            - "@mantis_api_bundle.service.mantis_client"
+
+    mantis_api_bundle.service.version:
+        class: A5sys\MantisApiBundle\Services\VersionService
+        arguments:
+            - "@mantis_api_bundle.service.mantis_client"
+
+    mantis_api_bundle.service.hook:
+        class: A5sys\MantisApiBundle\Services\HookService
+        arguments:
+            - "@mantis_api_bundle.service.mantis_client"
+

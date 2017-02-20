@@ -1,0 +1,27 @@
+Acme\BlogBundle\Entity\Param:
+  exclusion_policy: ALL
+  xml_root_name: param
+  properties:
+    project_id:
+      expose: true
+      type: integer
+      groups: [standard, restapi]
+    secret:
+      expose: false
+      type: string
+      groups: [restapi]
+    priority_id:
+      expose: true
+      type: integer
+      groups: [standard, restapi]
+    id:
+      expose: false
+      type: integer
+      groups: [restapi]
+  relations:
+    - rel: self
+      href:
+        route: api_get_param
+        parameters:
+          id: expr(object.getId())
+        absolute: true

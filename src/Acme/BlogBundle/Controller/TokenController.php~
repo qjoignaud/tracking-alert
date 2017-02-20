@@ -1,0 +1,129 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: R
+ * Date: 2015-09-28
+ * Time: 16:29
+ */
+
+namespace Acme\BlogBundle\Controller;
+
+use Acme\BlogBundle\Form\tokenType;
+use Acme\BlogBundle\Repository\tokenHandler;
+use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\Annotations;
+use Acme\BlogBundle\Entity\Token;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
+class TokenController extends FOSRestController
+{
+
+    /**
+     * @Annotations\View( templateVar="tokens" )
+     *
+     * @return Token
+     */
+    public function getTokensAction()
+    {
+        /** @var TokenHandler $tokenHandler */
+        $tokenHandler = $this->container->get('acme_blog.token.handler');
+
+        /** @var array $tokens */
+        $tokens = $tokenHandler->getAll();
+        return $tokens;
+    }
+
+    /**
+     * @Annotations\View(templateVar="token")
+     *
+     * @param $id
+     * @return Token
+     */
+    public function getTokenAction($id)
+    {
+        /** @var tokenHandler $tokenHandler */
+        $tokenHandler = $this->container->get('acme_blog.token.handler');
+
+        /** @var token $token */
+        $token = $tokenHandler->get($id);
+
+        return $token;
+    }
+
+    /**
+     * @Annotations\View(templateVar="token")
+     * @param int $id the token id
+     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     */
+    public function edittokenAction($id)
+    {
+        /** @var tokenHandler $tokenHandler */
+        $tokenHandler = $this->container->get('acme_blog.token.handler');
+
+        /** @var token $token */
+        $token = $tokenHandler->get($id);
+
+        $form = $this->createForm(new tokenType(), $token);
+
+        $view = $this->view($form, 200)
+            ->setTemplate('AcmeBlogBundle:token:edittoken.html.twig')
+            ->setTemplateVar('form')
+        ;
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id the token id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function posttokenAction(Request $request, $id)
+    {
+        /** @var tokenHandler $tokenHandler */
+        $tokenHandler = $this->container->get('acme_blog.token.handler');
+
+        /** @var token $token */
+        $token = $tokenHandler->get($id);
+
+        $form = $this->createForm(new tokenType(), $token);
+
+        $form->submit($request);
+        if ($form->isValid()) {
+            $tokenHandler->save($token);
+            $view = $this->routeRedirectView('api_get_token', ['id' => $token->getId()]);
+        } else {
+            $view = $this->view(['form' => $form], 400);
+        }
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id the token id
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function puttokenAction(Request $request, $id)
+    {
+        /** @var tokenHandler $tokenHandler */
+        $tokenHandler = $this->container->get('acme_blog.token.handler');
+
+        /** @var token $token */
+        $token = $tokenHandler->get($id);
+
+        $form = $this->createForm(new tokenType(), $token);
+
+        $form->submit($request);
+        if ($form->isValid()) {
+            $tokenHandler->save($token);
+            $view = $this->routeRedirectView('api_get_token', ['id' => $token->getId()]);
+        } else {
+            $view = $this->view(['form' => $form], 400);
+        }
+
+        return $this->handleView($view);
+    }
+}

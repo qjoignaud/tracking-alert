@@ -1,0 +1,19 @@
+acme_api_client:
+    path: /ApiClient
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template: 'AcmeApiClientBundle::index.html.twig'
+
+acme_blog:
+    resource: "@AcmeBlogBundle/Resources/config/routes.yml"
+    type:     rest
+
+
+
+index:
+    path: /index
+    defaults:
+        _controller: AcmeBlogBundle:Param:index
+        template: 'AcmeBlogBundle::editParam.html.twig'
+#fos_user:
+#    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
